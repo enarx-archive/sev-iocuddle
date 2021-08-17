@@ -9,5 +9,6 @@
 #![allow(clippy::unreadable_literal)]
 
 pub mod error;
+pub mod kvm;
 pub mod sev;
 pub mod util;
