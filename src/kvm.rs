@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
-use crate::error::*;
+use crate::error::{Error, Indeterminate};
 use crate::sev::Id;
 
 use iocuddle::*;
@@ -51,6 +51,15 @@ impl<'a, T: Id> Command<'a, T> {
             error: 0,
             sev_fd: sev.as_raw_fd() as _,
             _phantom: PhantomData,
+        }
+    }
+
+    /// Rather than relying on status codes from the Linux kernel, match the specific error code
+    /// returned by the SNP firmware to output errors in more detail.
+    pub fn encapsulate(&self, err: std::io::Error) -> Indeterminate<Error> {
+        match self.error {
+            0 => Indeterminate::<Error>::from(err),
+            _ => Indeterminate::<Error>::from(self.error as u32),
         }
     }
 }
