@@ -3,6 +3,7 @@ name = "sev-iocuddle"
 version = "0.1.0"
 authors = ["Tyler Fanelli <tfanelli@redhat.com>"]
 edition = "2018"
+exclude = [ ".gitignore", ".github/*" ]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
