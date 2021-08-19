@@ -10,7 +10,13 @@ homepage = "https://github.com/enarx/sev-iocuddle"
 repository = "https://github.com/enarx/sev-iocuddle"
 readme = "README.md"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[badges]
+# See https://doc.rust-lang.org/cargo/reference/manifest.html#the-badges-section
+github = { repository = "enarx/sev-iocuddle", workflow = "test" }
+#github = { repository = "enarx/sev-iocuddle", workflow = "lint" }
+maintenance = { status = "actively-developed" }
+is-it-maintained-issue-resolution = { repository = "enarx/sev-iocuddle" }
+is-it-maintained-open-issues = { repository = "enarx/sev-iocuddle" }
 
 [dependencies]
 iocuddle = "0.1.1"
