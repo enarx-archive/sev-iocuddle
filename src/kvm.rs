@@ -17,7 +17,7 @@ pub const ENC_OP: Ioctl<WriteRead, &c_ulong> = unsafe { KVM.write_read(0xBA) };
 /// used to pass arguments to the SEV ioctl implementation.
 ///
 /// This struct is defined in the Linux kernel: include/uapi/linux/psp-sev.h
-#[repr(C, packed)]
+#[repr(C)]
 pub struct Command<'a, T: Id> {
     code: u32,
     data: u64,
