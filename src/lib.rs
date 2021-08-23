@@ -7,6 +7,7 @@
 #![allow(unknown_lints)]
 #![allow(clippy::identity_op)]
 #![allow(clippy::unreadable_literal)]
+#![deny(missing_docs)]
 
 pub mod error;
 pub mod kvm;
