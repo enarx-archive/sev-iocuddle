@@ -18,12 +18,12 @@ pub const ENC_OP: Ioctl<WriteRead, &c_ulong> = unsafe { KVM.write_read(0xBA) };
 // the write with a reference, too.
 
 /// Corresponds to the `KVM_MEMORY_ENCRYPT_REG_REGION` ioctl
-pub const ENC_REG_REGION: Ioctl<Write, &kvmEncRegion> =
-    unsafe { KVM.read::<kvmEncRegion>(0xBB).lie() };
+pub const ENC_REG_REGION: Ioctl<Write, &KvmEncRegion> =
+    unsafe { KVM.read::<KvmEncRegion>(0xBB).lie() };
 
 /// Corresponds to the `KVM_MEMORY_ENCRYPT_UNREG_REGION` ioctl
-pub const ENC_UNREG_REGION: Ioctl<Write, &kvmEncRegion> =
-    unsafe { KVM.read::<kvmEncRegion>(0xBC).lie() };
+pub const ENC_UNREG_REGION: Ioctl<Write, &KvmEncRegion> =
+    unsafe { KVM.read::<KvmEncRegion>(0xBC).lie() };
 
 /// The Rust-flavored, FFI-friendly version of `struct sev_issue_cmd` which is
 /// used to pass arguments to the SEV ioctl implementation.
@@ -79,14 +79,14 @@ impl<'a, T: Id> Command<'a, T> {
 /// Corresponds to the kernel struct `kvm_enc_region`
 #[repr(C)]
 #[derive(Debug, Default, Copy, Clone, PartialEq)]
-pub struct kvmEncRegion<'a> {
+pub struct KvmEncRegion<'a> {
     addr: u64,
     size: u64,
     phantom: PhantomData<&'a [u8]>,
 }
 
-impl<'a> kvmEncRegion<'a> {
-    /// Create a new `kvmEncRegion` referencing some memory assigned to the virtual machine.
+impl<'a> KvmEncRegion<'a> {
+    /// Create a new `KvmEncRegion` referencing some memory assigned to the virtual machine.
     pub fn new(data: &'a [u8]) -> Self {
         Self {
             addr: data.as_ptr() as _,
