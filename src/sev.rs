@@ -4,6 +4,8 @@
 use crate::error::{Error, Indeterminate};
 
 use iocuddle::*;
+
+#[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
 use std::marker::PhantomData;
@@ -67,7 +69,8 @@ impl<'a, T: Id> Command<'a, T> {
 
 /// Information about the SEV-SNP platform version.
 #[repr(C)]
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Version {
     /// The major version number.
     pub major: u8,

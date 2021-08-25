@@ -20,4 +20,4 @@ is-it-maintained-open-issues = { repository = "enarx/sev-iocuddle" }
 
 [dependencies]
 iocuddle = "0.1.1"
-serde = { version = "1.0", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"], optional = true }
