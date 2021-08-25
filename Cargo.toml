@@ -1,7 +1,7 @@
 [package]
 name = "sev-iocuddle"
 version = "0.1.0"
-authors = ["Tyler Fanelli <tfanelli@redhat.com>"]
+authors = ["Tyler Fanelli <tfanelli@redhat.com>", "Nathaniel McCallum <nathaniel@congru.us>"]
 edition = "2018"
 exclude = [ ".gitignore", ".github/*" ]
 license = "Apache-2.0"
