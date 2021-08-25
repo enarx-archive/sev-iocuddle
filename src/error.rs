@@ -104,42 +104,41 @@ pub enum Error {
     SecureDataInvalid,
 }
 
+impl AsRef<str> for Error {
+    fn as_ref(&self) -> &str {
+        match self {
+            Self::IoError(_) => "I/O Error",
+            Self::InvalidPlatformState => "Invalid platform state",
+            Self::InvalidGuestState => "Invalid guest state",
+            Self::InvalidConfig => "Platform configuration invalid",
+            Self::InvalidLen => "Memory buffer too small",
+            Self::AlreadyOwned => "Platform is already owned",
+            Self::InvalidCertificate => "Invalid certificate",
+            Self::PolicyFailure => "Policy failure",
+            Self::Inactive => "Guest is inactive",
+            Self::InvalidAddress => "Provided address is invalid",
+            Self::BadSignature => "Provided signature is invalid",
+            Self::BadMeasurement => "Provided measurement is invalid",
+            Self::AsidOwned => "ASID is already owned",
+            Self::InvalidAsid => "ASID is invalid",
+            Self::WbinvdRequired => "WBINVD instruction required",
+            Self::DfFlushRequired => "DF_FLUSH invocation required",
+            Self::InvalidGuest => "Guest handle is invalid",
+            Self::InvalidCommand => "Issued command is invalid",
+            Self::Active => "Guest is active",
+            Self::HardwarePlatform => "HW condition, safe to re-allocate parameter buffers",
+            Self::HardwareUnsafe => "HW condition, unsafe to re-allocate parameter buffers",
+            Self::Unsupported => "Feature is unsupported",
+            Self::InvalidParam => "Given parameter is invalid",
+            Self::ResourceLimit => "SEV firmware is out of required resources",
+            Self::SecureDataInvalid => "SEV platform observed a failed integrity check",
+        }
+    }
+}
+
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let err_description = match self {
-            Error::IoError(_) => "I/O Error",
-            Error::InvalidPlatformState => "Invalid platform state",
-            Error::InvalidGuestState => "Invalid guest state",
-            Error::InvalidConfig => "Platform configuration invalid",
-            Error::InvalidLen => "Memory buffer too small",
-            Error::AlreadyOwned => "Platform is already owned",
-            Error::InvalidCertificate => "Invalid certificate",
-            Error::PolicyFailure => "Policy failure",
-            Error::Inactive => "Guest is inactive",
-            Error::InvalidAddress => "Provided address is invalid",
-            Error::BadSignature => "Provided signature is invalid",
-            Error::BadMeasurement => "Provided measurement is invalid",
-            Error::AsidOwned => "ASID is already owned",
-            Error::InvalidAsid => "ASID is invalid",
-            Error::WbinvdRequired => "WBINVD instruction required",
-            Error::DfFlushRequired => "DF_FLUSH invocation required",
-            Error::InvalidGuest => "Guest handle is invalid",
-            Error::InvalidCommand => "Issued command is invalid",
-            Error::Active => "Guest is active",
-            Error::HardwarePlatform => {
-                "Hardware condition occured, safe to re-allocate parameter buffers"
-            }
-            Error::HardwareUnsafe => {
-                "Hardware condition occured, unsafe to re-allocate parameter buffers"
-            }
-            Error::Unsupported => "Feature is unsupported",
-            Error::InvalidParam => "Given parameter is invalid",
-            Error::ResourceLimit => {
-                "SEV firmware has run out of required resources to carry out command"
-            }
-            Error::SecureDataInvalid => "SEV platform observed a failed integrity check",
-        };
-        write!(f, "{}", err_description)
+        write!(f, "{}", self.as_ref())
     }
 }
 
