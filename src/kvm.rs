@@ -35,7 +35,7 @@ pub struct Command<'a, T: Id> {
     data: u64,
     error: u32,
     sev_fd: u32,
-    _phantom: PhantomData<&'a T>,
+    phantom: PhantomData<&'a T>,
 }
 
 impl<'a, T: Id> Command<'a, T> {
@@ -48,7 +48,7 @@ impl<'a, T: Id> Command<'a, T> {
             data: subcmd as *mut T as u64,
             error: 0,
             sev_fd: sev.as_raw_fd() as _,
-            _phantom: PhantomData,
+            phantom: PhantomData,
         }
     }
 
@@ -62,7 +62,7 @@ impl<'a, T: Id> Command<'a, T> {
             data: subcmd as *const T as u64,
             error: 0,
             sev_fd: sev.as_raw_fd() as _,
-            _phantom: PhantomData,
+            phantom: PhantomData,
         }
     }
 

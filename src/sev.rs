@@ -26,7 +26,7 @@ pub struct Command<'a, T: Id> {
     code: u32,
     data: u64,
     error: u32,
-    _phantom: PhantomData<&'a T>,
+    phantom: PhantomData<&'a T>,
 }
 
 impl<'a, T: Id> Command<'a, T> {
@@ -38,7 +38,7 @@ impl<'a, T: Id> Command<'a, T> {
             code: T::ID,
             data: subcmd as *mut T as u64,
             error: 0,
-            _phantom: PhantomData,
+            phantom: PhantomData,
         }
     }
 
@@ -51,7 +51,7 @@ impl<'a, T: Id> Command<'a, T> {
             code: T::ID,
             data: subcmd as *const T as u64,
             error: 0,
-            _phantom: PhantomData,
+            phantom: PhantomData,
         }
     }
 
