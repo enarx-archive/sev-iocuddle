@@ -28,6 +28,7 @@ jobs:
             flag: --release
         features:
           -
+          - serde
 
   hw:
     name: hw ${{ matrix.toolchain }} ${{ matrix.profile.name }} ${{ matrix.features }}
@@ -55,3 +56,4 @@ jobs:
             flag: --release
         features:
           -
+          - serde
