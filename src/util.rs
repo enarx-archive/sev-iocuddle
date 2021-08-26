@@ -22,7 +22,9 @@ macro_rules! impl_const_id {
     };
 }
 
+/// Read data into another type.
 pub trait TypeLoad: Read {
+    /// Serialize to bytes and write to type T.
     fn load<T: Sized + Copy>(&mut self) -> Result<T> {
         let mut t = MaybeUninit::<T>::uninit();
         let s = unsafe { from_raw_parts_mut(t.as_mut_ptr() as _, size_of::<T>()) };
@@ -32,7 +34,9 @@ pub trait TypeLoad: Read {
     }
 }
 
+/// Write another type's data to self.
 pub trait TypeSave: Write {
+    /// Serialize the type to bytes and write to self.
     fn save<T: Sized + Copy>(&mut self, value: &T) -> Result<()> {
         let p = value as *const T as *const u8;
         let s = unsafe { from_raw_parts(p, size_of::<T>()) };

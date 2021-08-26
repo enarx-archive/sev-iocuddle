@@ -11,6 +11,8 @@ use std::os::unix::io::AsRawFd;
 
 /// The KVM iocuddle group.
 pub const KVM: Group = Group::new(0xAE);
+
+/// The ENC_OP subgroup within the KVM ioctl group.
 pub const ENC_OP: Ioctl<WriteRead, &c_ulong> = unsafe { KVM.write_read(0xBA) };
 
 // These two ioctls are specified as read, although they write.
